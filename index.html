@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tableau de bord de la démence en Europe</title>
     <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
-    <link rel="stylesheet" href="./styles.css?v=pages-lock-2" />
+    <link rel="stylesheet" href="./styles.css?v=pages-layout-1" />
   </head>
   <body class="is-locked">
     <section id="access-gate" class="access-gate" aria-label="Dashboard access">
@@ -132,24 +132,25 @@
               </div>
             </section>
 
-            <section class="total-panel">
-              <div class="section-head">
-                <h2 id="total-europe-heading">Total Europe</h2>
-                <span id="total-europe-caption" class="subtle"></span>
-              </div>
-              <div class="table-wrap">
-                <table class="total-table">
-                  <thead>
-                    <tr>
-                      <th data-total-header="factor">Variable</th>
-                      <th data-total-header="category">Catégorie</th>
-                      <th data-total-header="populationAttributableFraction">Fraction attribuable en population</th>
-                    </tr>
-                  </thead>
-                  <tbody id="total-europe-body"></tbody>
-                </table>
-              </div>
-            </section>
+          </div>
+        </section>
+
+        <section class="total-panel">
+          <div class="section-head">
+            <h2 id="total-europe-heading">Total Europe</h2>
+            <span id="total-europe-caption" class="subtle"></span>
+          </div>
+          <div class="table-wrap">
+            <table class="total-table">
+              <thead>
+                <tr>
+                  <th data-total-header="factor">Variable</th>
+                  <th data-total-header="category">Catégorie</th>
+                  <th data-total-header="populationAttributableFraction">Fraction attribuable en population</th>
+                </tr>
+              </thead>
+              <tbody id="total-europe-body"></tbody>
+            </table>
           </div>
         </section>
 
@@ -187,6 +188,6 @@
     </main>
 
     <script src="./vendor/leaflet/leaflet.js"></script>
-    <script src="./app.js?v=pages-lock-2"></script>
+    <script src="./app.js?v=pages-layout-1"></script>
   </body>
 </html>
