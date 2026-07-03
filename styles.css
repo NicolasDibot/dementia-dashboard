@@ -675,6 +675,34 @@ h3 {
   font-size: 12px;
 }
 
+.mini-factor {
+  position: relative;
+  padding-left: 14px;
+}
+
+.mini-factor::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 4px;
+  width: 4px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.mini-factor-adulthood {
+  color: var(--blue);
+}
+
+.mini-factor-early-life {
+  color: var(--red);
+}
+
+.mini-factor-occupation {
+  color: var(--green);
+}
+
 .table-wrap {
   overflow: auto;
   margin-top: 12px;

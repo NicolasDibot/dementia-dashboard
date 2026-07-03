@@ -815,7 +815,7 @@ function updateDetail(rows) {
   const contributors = detailVariableRows(row.country).map((item) => {
     return `
       <div class="mini-row">
-        <div><strong>${factorLabel(item.factor)}</strong><br><span>${groupLabel(item.factor.group)}</span></div>
+        <div class="mini-factor mini-factor-${groupClass(item.factor.group)}"><strong>${factorLabel(item.factor)}</strong><br><span>${groupLabel(item.factor.group)}</span></div>
         <strong>${pct(item.value)}</strong>
       </div>
     `;
