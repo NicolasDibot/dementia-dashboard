@@ -475,12 +475,18 @@ function europeValueForView(view = "Total") {
   return combine(factors.map((factor) => europeFactorValue(factor)));
 }
 
+function combineReference(values) {
+  const clean = values.map((value) => Math.max(0, value)).filter((value) => Number.isFinite(value));
+  const product = clean.reduce((acc, value) => acc * (1 - Math.min(value, 99.9) / 100), 1);
+  return 100 * (1 - product);
+}
+
 function fixedSummaryValueForView(view = "Total", sex = "both") {
   const factors = state.data.factors.filter((factor) => {
     if (!isSelectableFactor(factor) || !factor.defaultSelected || factor.interactivePaf <= 0) return false;
     return view === "Total" || factor.group === view;
   });
-  return combine(factors.map((factor) => europeFactorValue(factor, sex)));
+  return combineReference(factors.map((factor) => europeFactorValue(factor, sex)));
 }
 
 function combine(values) {
