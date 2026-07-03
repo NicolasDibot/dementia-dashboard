@@ -10,6 +10,8 @@ const state = {
   additive: false,
   activeCountry: null,
   focusCountry: null,
+  rankingSort: "Total",
+  rankingDirection: "desc",
 };
 
 const ACCESS_PASSWORD = "corossol";
@@ -563,6 +565,23 @@ function totalEuropeRows() {
     });
 }
 
+function rankingValue(row, sortKey = state.rankingSort) {
+  if (sortKey === "Total") return row.total;
+  return row.groups[sortKey] || 0;
+}
+
+function rankingRows() {
+  const rows = countryRows("Total");
+  const direction = state.rankingDirection === "asc" ? 1 : -1;
+  return rows.sort((a, b) => {
+    const diff = rankingValue(a) - rankingValue(b);
+    if (diff !== 0) return direction * diff;
+    const totalDiff = b.total - a.total;
+    if (totalDiff !== 0) return totalDiff;
+    return countryLabel(a.country).localeCompare(countryLabel(b.country), state.language);
+  });
+}
+
 function colorDomain(rows) {
   const values = rows
     .map((row) => row.value)
@@ -840,6 +859,15 @@ function renderRanking(rows) {
   }).join("");
 }
 
+function renderRankingSortControls() {
+  document.querySelectorAll("[data-ranking-sort]").forEach((button) => {
+    const active = button.dataset.rankingSort === state.rankingSort;
+    button.classList.toggle("active", active);
+    button.dataset.sortDirection = active ? state.rankingDirection : "none";
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
 function renderTotalEuropeTable() {
   document.getElementById("total-europe-caption").textContent = t("totalEuropeCaption").replace("{sex}", sexLabel());
   const body = document.getElementById("total-europe-body");
@@ -914,6 +942,9 @@ function renderStaticText() {
   document.querySelectorAll("[data-table-header]").forEach((cell) => {
     cell.textContent = tableLabel(cell.dataset.tableHeader);
   });
+  document.querySelectorAll("[data-ranking-sort-label]").forEach((cell) => {
+    cell.textContent = tableLabel(cell.dataset.rankingSortLabel);
+  });
   document.querySelectorAll("[data-total-header]").forEach((cell) => {
     cell.textContent = tableLabel(cell.dataset.totalHeader);
   });
@@ -932,7 +963,8 @@ function update() {
   renderStats(rows);
   renderMap(rows);
   renderDetail(rows);
-  renderRanking(countryRows("Total"));
+  renderRankingSortControls();
+  renderRanking(rankingRows());
   renderTotalEuropeTable();
   renderMethod();
 }
@@ -959,6 +991,19 @@ function setupActions() {
         localStorage.setItem("dashboardLanguage", state.language);
       } catch {
         // Ignore storage failures; the in-page language switch still works.
+      }
+      update();
+    });
+  });
+
+  document.querySelectorAll("[data-ranking-sort]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextSort = button.dataset.rankingSort;
+      if (state.rankingSort === nextSort) {
+        state.rankingDirection = state.rankingDirection === "desc" ? "asc" : "desc";
+      } else {
+        state.rankingSort = nextSort;
+        state.rankingDirection = "desc";
       }
       update();
     });

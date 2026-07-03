@@ -874,6 +874,62 @@ th {
   text-transform: uppercase;
 }
 
+.sort-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 800;
+  text-transform: inherit;
+  padding: 0;
+}
+
+.sort-header:hover {
+  color: var(--text);
+}
+
+.sort-icon {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+.sort-icon::before,
+.sort-icon::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.sort-icon::before {
+  top: 1px;
+  border-bottom: 5px solid #94a3b8;
+}
+
+.sort-icon::after {
+  bottom: 1px;
+  border-top: 5px solid #94a3b8;
+}
+
+.sort-header[data-sort-direction="asc"] .sort-icon::before {
+  border-bottom-color: var(--text);
+}
+
+.sort-header[data-sort-direction="desc"] .sort-icon::after {
+  border-top-color: var(--text);
+}
+
+.sort-header.active {
+  color: var(--text);
+}
+
 td.numeric {
   font-variant-numeric: tabular-nums;
   font-weight: 800;
