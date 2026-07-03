@@ -582,18 +582,41 @@ h3 {
 }
 
 .factor-group {
+  --factor-accent: #64748b;
+  --factor-bg: rgba(30, 41, 59, 0.72);
+  --factor-head-bg: rgba(31, 41, 55, 0.92);
+  background: var(--factor-bg);
   border: 1px solid #2b3544;
   border-radius: var(--radius);
   overflow: hidden;
 }
 
+.factor-group-adulthood {
+  --factor-accent: var(--blue);
+  --factor-bg: rgba(30, 64, 175, 0.18);
+  --factor-head-bg: rgba(30, 58, 138, 0.30);
+}
+
+.factor-group-early-life {
+  --factor-accent: var(--red);
+  --factor-bg: rgba(127, 29, 29, 0.22);
+  --factor-head-bg: rgba(127, 29, 29, 0.36);
+}
+
+.factor-group-occupation {
+  --factor-accent: var(--green);
+  --factor-bg: rgba(6, 95, 70, 0.20);
+  --factor-head-bg: rgba(6, 78, 59, 0.34);
+}
+
 .factor-group h3 {
   margin: 0;
   padding: 10px 12px;
-  background: #1f2937;
+  background: var(--factor-head-bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: inset 4px 0 0 var(--factor-accent);
 }
 
 .group-dot {
@@ -610,7 +633,8 @@ h3 {
   gap: 10px;
   align-items: start;
   padding: 10px 12px;
-  border-top: 1px solid #2b3544;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(2, 6, 23, 0.16);
 }
 
 .factor-item input {

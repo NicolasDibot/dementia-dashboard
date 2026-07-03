@@ -620,7 +620,7 @@ function renderFactors() {
   for (const group of state.data.groups) {
     const factors = state.data.factors.filter((factor) => factor.group === group.id && isSelectableFactor(factor));
     const groupEl = document.createElement("section");
-    groupEl.className = "factor-group";
+    groupEl.className = `factor-group factor-group-${groupClass(group.id)}`;
     const header = document.createElement("h3");
     header.innerHTML = `<span><span class="group-dot" style="background:${group.color}"></span>${groupLabel(group.id)}</span><span>${factors.length}</span>`;
     groupEl.appendChild(header);
