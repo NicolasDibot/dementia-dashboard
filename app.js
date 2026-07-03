@@ -849,10 +849,10 @@ function renderRanking(rows) {
     return `
       <tr>
         <td><strong>${countryLabel(row.country)}</strong></td>
-        <td class="numeric">${pct(row.total)}</td>
-        <td class="numeric">${pct(row.groups["Early life"] || 0)}</td>
-        <td class="numeric">${pct(row.groups["Adulthood"] || 0)}</td>
-        <td class="numeric">${pct(row.groups["Occupation"] || 0)}</td>
+        <td class="numeric ranking-col-total">${pct(row.total)}</td>
+        <td class="numeric ranking-col-early">${pct(row.groups["Early life"] || 0)}</td>
+        <td class="numeric ranking-col-adult">${pct(row.groups["Adulthood"] || 0)}</td>
+        <td class="numeric ranking-col-work">${pct(row.groups["Occupation"] || 0)}</td>
         <td>${top ? `${factorLabel(top.factor)} (${pct(top.value)})` : "-"}</td>
       </tr>
     `;

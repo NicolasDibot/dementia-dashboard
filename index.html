@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tableau de bord de la démence en Europe</title>
     <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
-    <link rel="stylesheet" href="./styles.css?v=ranking-sort-1" />
+    <link rel="stylesheet" href="./styles.css?v=ranking-layout-1" />
   </head>
   <body class="is-locked">
     <section id="access-gate" class="access-gate" aria-label="Dashboard access">
@@ -110,48 +110,48 @@
               <div id="country-contributors" class="mini-table"></div>
             </aside>
 
-            <section class="ranking-panel">
-              <div class="section-head">
-                <h2 id="ranking-heading">Classement pays</h2>
-                <span id="ranking-caption" class="subtle"></span>
-              </div>
-              <div class="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th data-table-header="country">Pays</th>
-                      <th>
-                        <button type="button" class="sort-header" data-ranking-sort="Total" data-ranking-label="total">
-                          <span data-ranking-sort-label="total">Total</span>
-                          <span class="sort-icon" aria-hidden="true"></span>
-                        </button>
-                      </th>
-                      <th>
-                        <button type="button" class="sort-header" data-ranking-sort="Early life" data-ranking-label="early">
-                          <span data-ranking-sort-label="early">Enfance</span>
-                          <span class="sort-icon" aria-hidden="true"></span>
-                        </button>
-                      </th>
-                      <th>
-                        <button type="button" class="sort-header" data-ranking-sort="Adulthood" data-ranking-label="adult">
-                          <span data-ranking-sort-label="adult">Adulte</span>
-                          <span class="sort-icon" aria-hidden="true"></span>
-                        </button>
-                      </th>
-                      <th>
-                        <button type="button" class="sort-header" data-ranking-sort="Occupation" data-ranking-label="work">
-                          <span data-ranking-sort-label="work">Travail</span>
-                          <span class="sort-icon" aria-hidden="true"></span>
-                        </button>
-                      </th>
-                      <th data-table-header="top">Top facteur</th>
-                    </tr>
-                  </thead>
-                  <tbody id="ranking-body"></tbody>
-                </table>
-              </div>
-            </section>
+          </div>
+        </section>
 
+        <section class="ranking-panel">
+          <div class="section-head">
+            <h2 id="ranking-heading">Classement pays</h2>
+            <span id="ranking-caption" class="subtle"></span>
+          </div>
+          <div class="table-wrap">
+            <table class="ranking-table">
+              <thead>
+                <tr>
+                  <th data-table-header="country">Pays</th>
+                  <th class="ranking-col-total">
+                    <button type="button" class="sort-header" data-ranking-sort="Total" data-ranking-label="total">
+                      <span data-ranking-sort-label="total">Total</span>
+                      <span class="sort-icon" aria-hidden="true"></span>
+                    </button>
+                  </th>
+                  <th class="ranking-col-early">
+                    <button type="button" class="sort-header" data-ranking-sort="Early life" data-ranking-label="early">
+                      <span data-ranking-sort-label="early">Enfance</span>
+                      <span class="sort-icon" aria-hidden="true"></span>
+                    </button>
+                  </th>
+                  <th class="ranking-col-adult">
+                    <button type="button" class="sort-header" data-ranking-sort="Adulthood" data-ranking-label="adult">
+                      <span data-ranking-sort-label="adult">Adulte</span>
+                      <span class="sort-icon" aria-hidden="true"></span>
+                    </button>
+                  </th>
+                  <th class="ranking-col-work">
+                    <button type="button" class="sort-header" data-ranking-sort="Occupation" data-ranking-label="work">
+                      <span data-ranking-sort-label="work">Travail</span>
+                      <span class="sort-icon" aria-hidden="true"></span>
+                    </button>
+                  </th>
+                  <th data-table-header="top">Top facteur</th>
+                </tr>
+              </thead>
+              <tbody id="ranking-body"></tbody>
+            </table>
           </div>
         </section>
 
@@ -209,6 +209,6 @@
     </main>
 
     <script src="./vendor/leaflet/leaflet.js"></script>
-    <script src="./app.js?v=ranking-sort-1"></script>
+    <script src="./app.js?v=ranking-layout-1"></script>
   </body>
 </html>
