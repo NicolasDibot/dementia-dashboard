@@ -6,7 +6,7 @@
     <title>Tableau de bord de la démence en Europe</title>
     <link rel="icon" type="image/png" sizes="64x64" href="./assets/favicon.png?v=corossol-favicon-1" />
     <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
-    <link rel="stylesheet" href="./styles.css?v=fixed-sex-summary-1" />
+    <link rel="stylesheet" href="./styles.css?v=sidebar-stacked-logos-1" />
   </head>
   <body class="is-locked">
     <section id="access-gate" class="access-gate" aria-label="Dashboard access">
@@ -42,6 +42,33 @@
             <button type="button" data-action="none">Aucun</button>
           </div>
           <div id="factor-list" class="factor-list"></div>
+        </section>
+
+        <section class="logos-panel" aria-label="Institutions partenaires">
+          <div class="logo-strip">
+            <div class="logo-card logo-card-tracer">
+              <img src="./assets/logos/tracer.png" alt="TRACeR" loading="lazy" />
+              <span>TRAjectories of Cognitive decline and Recovery</span>
+            </div>
+            <div class="logo-card logo-card-wide">
+              <img src="./assets/logos/inserm.svg" alt="Inserm" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-wide">
+              <img src="./assets/logos/imrb.svg" alt="Institut Mondor de Recherche Biomédicale" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-wide logo-card-aphp">
+              <img src="./assets/logos/aphp.png" alt="Assistance Publique - Hôpitaux de Paris" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-square">
+              <img src="./assets/logos/upec.svg" alt="UPEC" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-wide logo-card-dec">
+              <img src="./assets/logos/dec-ens.png" alt="ENS Département d'études cognitives" loading="lazy" />
+            </div>
+          </div>
+          <p id="credits-text" class="credits-text">
+            Ces travaux ont été réalisés par l'équipe TRACeR dirigée par le Pr. Philippe Rémy, dans le cadre d'un projet sur la démence dirigé par le Dr. Laurent Cleret de Langavant. Contributeurs: Dr. Nicolas Dibot, Dr. Amin Gharbi-Meliani, Pr. Eléonore Bayen, Pr. Kristin Yaffe
+          </p>
         </section>
       </aside>
 
@@ -245,36 +272,10 @@
           <div id="method-content" class="method-content"></div>
         </section>
 
-        <section class="logos-panel" aria-label="Institutions partenaires">
-          <p id="credits-text" class="credits-text">
-            Ces travaux ont été réalisés par l'équipe TRACeR dirigée par le Pr. Philippe Rémy, dans le cadre d'un projet sur la démence dirigé par le Dr. Laurent Cleret de Langavant. Contributeurs: Dr. Nicolas Dibot, Dr. Amin Gharbi-Meliani, Pr. Eléonore Bayen, Pr. Kristin Yaffe
-          </p>
-          <div class="logo-strip">
-            <div class="logo-card logo-card-tracer">
-              <img src="./assets/logos/tracer.png" alt="TRACeR" loading="lazy" />
-              <span>TRAjectories of Cognitive decline and Recovery</span>
-            </div>
-            <div class="logo-card logo-card-wide">
-              <img src="./assets/logos/inserm.svg" alt="Inserm" loading="lazy" />
-            </div>
-            <div class="logo-card logo-card-wide">
-              <img src="./assets/logos/imrb.svg" alt="Institut Mondor de Recherche Biomédicale" loading="lazy" />
-            </div>
-            <div class="logo-card logo-card-wide logo-card-aphp">
-              <img src="./assets/logos/aphp.png" alt="Assistance Publique - Hôpitaux de Paris" loading="lazy" />
-            </div>
-            <div class="logo-card logo-card-square">
-              <img src="./assets/logos/upec.svg" alt="UPEC" loading="lazy" />
-            </div>
-            <div class="logo-card logo-card-wide logo-card-dec">
-              <img src="./assets/logos/dec-ens.png" alt="ENS Département d'études cognitives" loading="lazy" />
-            </div>
-          </div>
-        </section>
       </section>
     </main>
 
     <script src="./vendor/leaflet/leaflet.js"></script>
-    <script src="./app.js?v=fixed-sex-summary-1"></script>
+    <script src="./app.js?v=sidebar-stacked-logos-1"></script>
   </body>
 </html>
