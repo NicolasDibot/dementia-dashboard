@@ -912,6 +912,7 @@ function renderViewControls() {
     button.classList.toggle("active", button.dataset.view === state.view);
   });
   document.getElementById("view-title").textContent = viewTitle(state.view);
+  document.querySelector(".ranking-table")?.setAttribute("data-active-view", groupClass(state.view));
 }
 
 function renderSexControls() {
