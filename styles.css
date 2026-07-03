@@ -836,13 +836,13 @@ h3 {
 }
 
 .sidebar .logos-panel {
-  flex: 1 0 430px;
-  min-height: 430px;
+  flex: 0 0 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 18px;
-  padding: 16px 0 0;
+  padding: 12px 0 0;
   border-top: 1px solid #2b3544;
 }
 
@@ -858,11 +858,11 @@ h3 {
 
 .sidebar .credits-text {
   max-width: none;
-  margin: 12px 0 0;
+  margin: 14px 0 0;
   color: #a7b0bd;
-  font-size: 9px;
-  font-weight: 650;
-  line-height: 1.35;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.12;
   text-align: left;
 }
 
@@ -875,13 +875,13 @@ h3 {
 }
 
 .sidebar .logo-strip {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: stretch;
-  justify-content: space-evenly;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 5px;
 }
 
 .logo-card {
@@ -914,8 +914,8 @@ a.logo-card:focus-visible {
 .sidebar .logo-card {
   width: 100%;
   min-width: 0;
-  height: 58px;
-  padding: 7px 10px;
+  height: 64px;
+  padding: 3px 4px;
   box-shadow: 0 8px 18px rgba(2, 6, 23, 0.28);
 }
 
@@ -927,8 +927,8 @@ a.logo-card:focus-visible {
 }
 
 .sidebar .logo-card img {
-  max-width: 220px;
-  max-height: 38px;
+  max-width: calc(100% - 4px);
+  max-height: 56px;
 }
 
 .logo-card-wide img {
@@ -941,8 +941,8 @@ a.logo-card:focus-visible {
 }
 
 .sidebar .logo-card-square img {
-  max-width: 70px;
-  max-height: 40px;
+  max-width: 96%;
+  max-height: 56px;
 }
 
 .logo-card-aphp img {
@@ -951,8 +951,8 @@ a.logo-card:focus-visible {
 }
 
 .sidebar .logo-card-aphp img {
-  max-width: 235px;
-  max-height: 36px;
+  max-width: 99%;
+  max-height: 54px;
 }
 
 .logo-card-dec img {
@@ -961,8 +961,8 @@ a.logo-card:focus-visible {
 }
 
 .sidebar .logo-card-dec img {
-  max-width: 235px;
-  max-height: 42px;
+  max-width: 99%;
+  max-height: 56px;
 }
 
 .logo-card-tracer {
@@ -978,8 +978,8 @@ a.logo-card:focus-visible {
 }
 
 .sidebar .logo-card-tracer img {
-  max-width: 128px;
-  max-height: 32px;
+  max-width: 86%;
+  max-height: 36px;
 }
 
 .logo-card-tracer span {
@@ -993,8 +993,8 @@ a.logo-card:focus-visible {
 }
 
 .sidebar .logo-card-tracer span {
-  max-width: 170px;
-  font-size: 8px;
+  max-width: 94%;
+  font-size: 10px;
 }
 
 table {
