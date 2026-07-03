@@ -193,7 +193,7 @@ h3 {
 }
 
 .topbar,
-.stats-row,
+.stats-stack,
 .main-grid,
 .ranking-panel,
 .total-panel,
@@ -280,6 +280,12 @@ h3 {
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.14);
 }
 
+.stats-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .stats-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -336,6 +342,15 @@ h3 {
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
+}
+
+.stat-box .stat-sex {
+  display: block;
+  margin-bottom: 3px;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
 }
 
 .stat-box strong {

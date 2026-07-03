@@ -438,33 +438,33 @@ function selectedFactorsForView(view = state.view) {
   });
 }
 
-function factorPayload(country, factorId) {
+function factorPayload(country, factorId, sex = state.sex) {
   return (
-    state.data.valuesBySexCountry?.[state.sex]?.[country]?.[factorId]
+    state.data.valuesBySexCountry?.[sex]?.[country]?.[factorId]
     || state.data.valuesByCountry?.[country]?.[factorId]
     || null
   );
 }
 
-function factorValue(country, factorId) {
-  return factorPayload(country, factorId)?.value || 0;
+function factorValue(country, factorId, sex = state.sex) {
+  return factorPayload(country, factorId, sex)?.value || 0;
 }
 
-function factorMeanValue(factorId) {
+function factorMeanValue(factorId, sex = state.sex) {
   const values = state.data.countries
-    .map((country) => factorValue(country, factorId))
+    .map((country) => factorValue(country, factorId, sex))
     .filter((value) => Number.isFinite(value));
   return values.reduce((sum, value) => sum + value, 0) / Math.max(values.length, 1);
 }
 
-function europeFactorValue(factor) {
-  const sexValue = factor.europePafBySex?.[state.sex];
+function europeFactorValue(factor, sex = state.sex) {
+  const sexValue = factor.europePafBySex?.[sex];
   if (Number.isFinite(sexValue)) return sexValue;
-  if (state.sex !== "both") return factorMeanValue(factor.id);
+  if (sex !== "both") return factorMeanValue(factor.id, sex);
   const bothValue = factor.europePafBySex?.both;
   if (Number.isFinite(bothValue)) return bothValue;
   if (Number.isFinite(factor.interactivePaf)) return factor.interactivePaf;
-  return factorMeanValue(factor.id);
+  return factorMeanValue(factor.id, sex);
 }
 
 function europeValueForView(view = "Total") {
@@ -473,6 +473,14 @@ function europeValueForView(view = "Total") {
     return view === "Total" || factor.group === view;
   });
   return combine(factors.map((factor) => europeFactorValue(factor)));
+}
+
+function fixedSummaryValueForView(view = "Total", sex = "both") {
+  const factors = state.data.factors.filter((factor) => {
+    if (!isSelectableFactor(factor) || !factor.defaultSelected || factor.interactivePaf <= 0) return false;
+    return view === "Total" || factor.group === view;
+  });
+  return combine(factors.map((factor) => europeFactorValue(factor, sex)));
 }
 
 function combine(values) {
@@ -648,10 +656,17 @@ function renderFactors() {
 }
 
 function renderStats() {
-  document.getElementById("stat-europe-total").textContent = pct(europeValueForView("Total"));
-  document.getElementById("stat-europe-early").textContent = pct(europeValueForView("Early life"));
-  document.getElementById("stat-europe-adult").textContent = pct(europeValueForView("Adulthood"));
-  document.getElementById("stat-europe-work").textContent = pct(europeValueForView("Occupation"));
+  const views = {
+    total: "Total",
+    early: "Early life",
+    adult: "Adulthood",
+    work: "Occupation",
+  };
+  for (const sex of ["both", "women", "men"]) {
+    for (const [key, view] of Object.entries(views)) {
+      document.getElementById(`stat-${sex}-${key}`).textContent = pct(fixedSummaryValueForView(view, sex));
+    }
+  }
   document.getElementById("selected-count").textContent = `${state.selected.size} ${state.selected.size === 1 ? t("selectedSingular") : t("selected")}`;
   document.getElementById("ranking-caption").textContent = state.additive ? t("additiveCaption") : t("multiplicativeCaption");
 }
@@ -925,7 +940,7 @@ function renderStaticText() {
   document.querySelector(".sidebar").setAttribute("aria-label", t("sidebarAria"));
   document.querySelector(".quick-actions").setAttribute("aria-label", t("quickActionsAria"));
   document.querySelector(".segmented").setAttribute("aria-label", t("mapViewAria"));
-  document.querySelector(".stats-row").setAttribute("aria-label", t("summaryAria"));
+  document.querySelector(".stats-stack").setAttribute("aria-label", t("summaryAria"));
   document.getElementById("map").setAttribute("aria-label", t("mapAria"));
   document.querySelector(".sex-map-control").setAttribute("aria-label", t("sexAria"));
   document.querySelector(".language-switch").setAttribute("aria-label", t("languageAria"));
@@ -935,10 +950,21 @@ function renderStaticText() {
   document.getElementById("factors-heading").textContent = t("factors");
   document.getElementById("paf-eyebrow").textContent = t("pafEyebrow");
   document.getElementById("formula-label").textContent = t("additiveSum");
-  document.querySelector('[data-stat-label="total"]').textContent = t("europeTotalCard");
-  document.querySelector('[data-stat-label="early"]').textContent = t("europeEarlyCard");
-  document.querySelector('[data-stat-label="adult"]').textContent = t("europeAdultCard");
-  document.querySelector('[data-stat-label="work"]').textContent = t("europeWorkCard");
+  document.querySelectorAll('[data-stat-label="total"]').forEach((cell) => {
+    cell.textContent = t("europeTotalCard");
+  });
+  document.querySelectorAll('[data-stat-label="early"]').forEach((cell) => {
+    cell.textContent = t("europeEarlyCard");
+  });
+  document.querySelectorAll('[data-stat-label="adult"]').forEach((cell) => {
+    cell.textContent = t("europeAdultCard");
+  });
+  document.querySelectorAll('[data-stat-label="work"]').forEach((cell) => {
+    cell.textContent = t("europeWorkCard");
+  });
+  document.querySelectorAll("[data-stat-sex-label]").forEach((cell) => {
+    cell.textContent = sexLabel(cell.dataset.statSexLabel);
+  });
   document.getElementById("contributors-heading").textContent = t("contributors");
   document.getElementById("ranking-heading").textContent = t("ranking");
   document.getElementById("total-europe-heading").textContent = t("totalEurope");

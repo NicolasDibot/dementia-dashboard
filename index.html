@@ -6,7 +6,7 @@
     <title>Tableau de bord de la démence en Europe</title>
     <link rel="icon" type="image/png" sizes="64x64" href="./assets/favicon.png?v=corossol-favicon-1" />
     <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
-    <link rel="stylesheet" href="./styles.css?v=sidebar-no-rr-1" />
+    <link rel="stylesheet" href="./styles.css?v=fixed-sex-summary-1" />
   </head>
   <body class="is-locked">
     <section id="access-gate" class="access-gate" aria-label="Dashboard access">
@@ -67,23 +67,73 @@
           </div>
         </header>
 
-        <section class="stats-row" aria-label="Résumé">
-          <article class="stat-box stat-total">
-            <span data-stat-label="total">Total Europe</span>
-            <strong id="stat-europe-total">-</strong>
-          </article>
-          <article class="stat-box stat-early">
-            <span data-stat-label="early">Enfance</span>
-            <strong id="stat-europe-early">-</strong>
-          </article>
-          <article class="stat-box stat-adult">
-            <span data-stat-label="adult">Adulte</span>
-            <strong id="stat-europe-adult">-</strong>
-          </article>
-          <article class="stat-box stat-work">
-            <span data-stat-label="work">Travail</span>
-            <strong id="stat-europe-work">-</strong>
-          </article>
+        <section class="stats-stack" aria-label="Résumé">
+          <div class="stats-row">
+            <article class="stat-box stat-total">
+              <span class="stat-sex" data-stat-sex-label="both">Deux sexes</span>
+              <span data-stat-label="total">Total Europe</span>
+              <strong id="stat-both-total">-</strong>
+            </article>
+            <article class="stat-box stat-early">
+              <span class="stat-sex" data-stat-sex-label="both">Deux sexes</span>
+              <span data-stat-label="early">Enfance</span>
+              <strong id="stat-both-early">-</strong>
+            </article>
+            <article class="stat-box stat-adult">
+              <span class="stat-sex" data-stat-sex-label="both">Deux sexes</span>
+              <span data-stat-label="adult">Adulte</span>
+              <strong id="stat-both-adult">-</strong>
+            </article>
+            <article class="stat-box stat-work">
+              <span class="stat-sex" data-stat-sex-label="both">Deux sexes</span>
+              <span data-stat-label="work">Travail</span>
+              <strong id="stat-both-work">-</strong>
+            </article>
+          </div>
+          <div class="stats-row">
+            <article class="stat-box stat-total">
+              <span class="stat-sex" data-stat-sex-label="women">Femmes</span>
+              <span data-stat-label="total">Total Europe</span>
+              <strong id="stat-women-total">-</strong>
+            </article>
+            <article class="stat-box stat-early">
+              <span class="stat-sex" data-stat-sex-label="women">Femmes</span>
+              <span data-stat-label="early">Enfance</span>
+              <strong id="stat-women-early">-</strong>
+            </article>
+            <article class="stat-box stat-adult">
+              <span class="stat-sex" data-stat-sex-label="women">Femmes</span>
+              <span data-stat-label="adult">Adulte</span>
+              <strong id="stat-women-adult">-</strong>
+            </article>
+            <article class="stat-box stat-work">
+              <span class="stat-sex" data-stat-sex-label="women">Femmes</span>
+              <span data-stat-label="work">Travail</span>
+              <strong id="stat-women-work">-</strong>
+            </article>
+          </div>
+          <div class="stats-row">
+            <article class="stat-box stat-total">
+              <span class="stat-sex" data-stat-sex-label="men">Hommes</span>
+              <span data-stat-label="total">Total Europe</span>
+              <strong id="stat-men-total">-</strong>
+            </article>
+            <article class="stat-box stat-early">
+              <span class="stat-sex" data-stat-sex-label="men">Hommes</span>
+              <span data-stat-label="early">Enfance</span>
+              <strong id="stat-men-early">-</strong>
+            </article>
+            <article class="stat-box stat-adult">
+              <span class="stat-sex" data-stat-sex-label="men">Hommes</span>
+              <span data-stat-label="adult">Adulte</span>
+              <strong id="stat-men-adult">-</strong>
+            </article>
+            <article class="stat-box stat-work">
+              <span class="stat-sex" data-stat-sex-label="men">Hommes</span>
+              <span data-stat-label="work">Travail</span>
+              <strong id="stat-men-work">-</strong>
+            </article>
+          </div>
         </section>
 
         <section class="main-grid">
@@ -225,6 +275,6 @@
     </main>
 
     <script src="./vendor/leaflet/leaflet.js"></script>
-    <script src="./app.js?v=sidebar-no-rr-1"></script>
+    <script src="./app.js?v=fixed-sex-summary-1"></script>
   </body>
 </html>
