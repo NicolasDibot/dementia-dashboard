@@ -547,8 +547,32 @@ h3 {
   font-size: 12px;
 }
 
+.quick-actions button[data-action="all"] {
+  background: rgba(109, 40, 217, 0.22);
+  border-color: rgba(167, 139, 250, 0.55);
+  color: #f3e8ff;
+}
+
+.quick-actions button[data-action="early"] {
+  background: rgba(220, 38, 38, 0.22);
+  border-color: rgba(248, 113, 113, 0.55);
+  color: #fee2e2;
+}
+
+.quick-actions button[data-action="adult"] {
+  background: rgba(37, 99, 235, 0.24);
+  border-color: rgba(96, 165, 250, 0.58);
+  color: #dbeafe;
+}
+
+.quick-actions button[data-action="work"] {
+  background: rgba(4, 120, 87, 0.28);
+  border-color: rgba(52, 211, 153, 0.58);
+  color: #d1fae5;
+}
+
 .quick-actions button:hover {
-  background: #334155;
+  filter: brightness(1.18);
 }
 
 .factor-list {
