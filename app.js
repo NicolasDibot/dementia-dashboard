@@ -12,6 +12,8 @@ const state = {
   focusCountry: null,
   rankingSort: "Total",
   rankingDirection: "desc",
+  totalSort: "paf",
+  totalDirection: "desc",
 };
 
 const ACCESS_PASSWORD = "corossol";
@@ -543,6 +545,7 @@ function detailVariableRows(country) {
 function totalEuropeRows() {
   const groupOrder = Object.fromEntries(state.data.groups.map((group, index) => [group.id, index]));
   const factorOrder = Object.fromEntries(state.data.factors.map((factor, index) => [factor.id, index]));
+  const direction = state.totalDirection === "asc" ? 1 : -1;
   return state.data.factors
     .filter(isSelectableFactor)
     .map((factor) => ({
@@ -550,17 +553,18 @@ function totalEuropeRows() {
       value: europeFactorValue(factor),
     }))
     .sort((a, b) => {
-      if (state.view !== "Total") {
-        const aSelectedGroup = a.factor.group === state.view ? 0 : 1;
-        const bSelectedGroup = b.factor.group === state.view ? 0 : 1;
-        if (aSelectedGroup !== bSelectedGroup) return aSelectedGroup - bSelectedGroup;
-      }
-      if (state.view === "Total") {
+      if (state.totalSort === "category") {
+        const aGroup = groupOrder[a.factor.group] ?? 999;
+        const bGroup = groupOrder[b.factor.group] ?? 999;
+        if (aGroup !== bGroup) return direction * (aGroup - bGroup);
         return b.value - a.value || (factorOrder[a.factor.id] ?? 999) - (factorOrder[b.factor.id] ?? 999);
       }
-      const aGroup = groupOrder[a.factor.group] ?? 999;
-      const bGroup = groupOrder[b.factor.group] ?? 999;
-      if (aGroup !== bGroup) return aGroup - bGroup;
+      if (state.totalSort === "factor") {
+        const labelDiff = factorLabel(a.factor).localeCompare(factorLabel(b.factor), state.language);
+        if (labelDiff !== 0) return direction * labelDiff;
+        return b.value - a.value || (factorOrder[a.factor.id] ?? 999) - (factorOrder[b.factor.id] ?? 999);
+      }
+      if (a.value !== b.value) return direction * (a.value - b.value);
       return (factorOrder[a.factor.id] ?? 999) - (factorOrder[b.factor.id] ?? 999);
     });
 }
@@ -868,6 +872,15 @@ function renderRankingSortControls() {
   });
 }
 
+function renderTotalSortControls() {
+  document.querySelectorAll("[data-total-sort]").forEach((button) => {
+    const active = button.dataset.totalSort === state.totalSort;
+    button.classList.toggle("active", active);
+    button.dataset.sortDirection = active ? state.totalDirection : "none";
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
 function renderTotalEuropeTable() {
   document.getElementById("total-europe-caption").textContent = t("totalEuropeCaption").replace("{sex}", sexLabel());
   const body = document.getElementById("total-europe-body");
@@ -945,8 +958,8 @@ function renderStaticText() {
   document.querySelectorAll("[data-ranking-sort-label]").forEach((cell) => {
     cell.textContent = tableLabel(cell.dataset.rankingSortLabel);
   });
-  document.querySelectorAll("[data-total-header]").forEach((cell) => {
-    cell.textContent = tableLabel(cell.dataset.totalHeader);
+  document.querySelectorAll("[data-total-sort-label]").forEach((cell) => {
+    cell.textContent = tableLabel(cell.dataset.totalSortLabel);
   });
   document.querySelectorAll("[data-language]").forEach((button) => {
     button.classList.toggle("active", button.dataset.language === state.language);
@@ -965,6 +978,7 @@ function update() {
   renderDetail(rows);
   renderRankingSortControls();
   renderRanking(rankingRows());
+  renderTotalSortControls();
   renderTotalEuropeTable();
   renderMethod();
 }
@@ -1004,6 +1018,19 @@ function setupActions() {
       } else {
         state.rankingSort = nextSort;
         state.rankingDirection = "desc";
+      }
+      update();
+    });
+  });
+
+  document.querySelectorAll("[data-total-sort]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextSort = button.dataset.totalSort;
+      if (state.totalSort === nextSort) {
+        state.totalDirection = state.totalDirection === "desc" ? "asc" : "desc";
+      } else {
+        state.totalSort = nextSort;
+        state.totalDirection = nextSort === "paf" ? "desc" : "asc";
       }
       update();
     });

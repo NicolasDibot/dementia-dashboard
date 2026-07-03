@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tableau de bord de la démence en Europe</title>
     <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
-    <link rel="stylesheet" href="./styles.css?v=topbar-copy-1" />
+    <link rel="stylesheet" href="./styles.css?v=total-table-sort-1" />
   </head>
   <body class="is-locked">
     <section id="access-gate" class="access-gate" aria-label="Dashboard access">
@@ -164,9 +164,24 @@
             <table class="total-table">
               <thead>
                 <tr>
-                  <th data-total-header="factor">Variable</th>
-                  <th data-total-header="category">Catégorie</th>
-                  <th data-total-header="populationAttributableFraction">Fraction attribuable en population</th>
+                  <th>
+                    <button type="button" class="sort-header" data-total-sort="factor">
+                      <span data-total-sort-label="factor">Variable</span>
+                      <span class="sort-icon" aria-hidden="true"></span>
+                    </button>
+                  </th>
+                  <th>
+                    <button type="button" class="sort-header" data-total-sort="category">
+                      <span data-total-sort-label="category">Catégorie</span>
+                      <span class="sort-icon" aria-hidden="true"></span>
+                    </button>
+                  </th>
+                  <th>
+                    <button type="button" class="sort-header" data-total-sort="paf">
+                      <span data-total-sort-label="populationAttributableFraction">Fraction attribuable en population</span>
+                      <span class="sort-icon" aria-hidden="true"></span>
+                    </button>
+                  </th>
                 </tr>
               </thead>
               <tbody id="total-europe-body"></tbody>
@@ -209,6 +224,6 @@
     </main>
 
     <script src="./vendor/leaflet/leaflet.js"></script>
-    <script src="./app.js?v=topbar-copy-1"></script>
+    <script src="./app.js?v=total-table-sort-1"></script>
   </body>
 </html>
