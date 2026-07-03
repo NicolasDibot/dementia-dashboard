@@ -633,9 +633,6 @@ function renderFactors() {
         <input type="checkbox" data-factor="${factor.id}" ${checked} />
         <span>
           <span class="factor-label">${factorLabel(factor)}</span>
-          <span class="factor-meta">
-            RR ${factor.rr ? factor.rr.toFixed(2) : t("notAvailable")} · ${pLabel(factor.pValue)}
-          </span>
         </span>
         <span class="factor-value">${pct(factorMeanValue(factor.id))}</span>
       `;
