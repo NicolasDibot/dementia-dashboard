@@ -43,8 +43,6 @@ const translations = {
       selectedSingular: "sélectionné",
       quickActionsAria: "Sélection rapide",
       sidebarAria: "Contrôles du dashboard",
-      pafEyebrow: "Scénario interactif",
-      mapViewAria: "Carte affichée",
       additiveSum: "Somme additive",
       summaryAria: "Résumé",
       europeTotalCard: "Total Europe",
@@ -187,8 +185,6 @@ const translations = {
       selectedSingular: "selected",
       quickActionsAria: "Quick selection",
       sidebarAria: "Dashboard controls",
-      pafEyebrow: "Interactive scenario",
-      mapViewAria: "Displayed map",
       additiveSum: "Additive sum",
       summaryAria: "Summary",
       europeTotalCard: "Europe total",
@@ -926,9 +922,6 @@ function renderMethod() {
 }
 
 function renderViewControls() {
-  document.querySelectorAll("[data-view]").forEach((button) => {
-    button.classList.toggle("active", button.dataset.view === state.view);
-  });
   document.getElementById("view-title").textContent = viewTitle(state.view);
   document.querySelector(".ranking-table")?.setAttribute("data-active-view", groupClass(state.view));
 }
@@ -945,7 +938,6 @@ function renderStaticText() {
   document.title = t("documentTitle");
   document.querySelector(".sidebar").setAttribute("aria-label", t("sidebarAria"));
   document.querySelector(".quick-actions").setAttribute("aria-label", t("quickActionsAria"));
-  document.querySelector(".segmented").setAttribute("aria-label", t("mapViewAria"));
   document.querySelector(".stats-stack").setAttribute("aria-label", t("summaryAria"));
   document.getElementById("map").setAttribute("aria-label", t("mapAria"));
   document.querySelector(".sex-map-control").setAttribute("aria-label", t("sexAria"));
@@ -954,7 +946,6 @@ function renderStaticText() {
 
   document.getElementById("app-title").textContent = t("appTitle");
   document.getElementById("factors-heading").textContent = t("factors");
-  document.getElementById("paf-eyebrow").textContent = t("pafEyebrow");
   document.getElementById("formula-label").textContent = t("additiveSum");
   document.querySelectorAll('[data-stat-label="total"]').forEach((cell) => {
     cell.textContent = t("europeTotalCard");
@@ -978,9 +969,6 @@ function renderStaticText() {
 
   document.querySelectorAll("[data-action]").forEach((button) => {
     button.textContent = actionLabel(button.dataset.action);
-  });
-  document.querySelectorAll("[data-view]").forEach((button) => {
-    button.textContent = groupLabel(button.dataset.view);
   });
   document.querySelectorAll("[data-table-header]").forEach((cell) => {
     cell.textContent = tableLabel(cell.dataset.tableHeader);
@@ -1014,13 +1002,6 @@ function update() {
 }
 
 function setupActions() {
-  document.querySelectorAll("[data-view]").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.view = button.dataset.view;
-      update();
-    });
-  });
-
   document.querySelectorAll("[data-sex]").forEach((button) => {
     button.addEventListener("click", () => {
       state.sex = button.dataset.sex;
