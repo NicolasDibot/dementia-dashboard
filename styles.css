@@ -841,7 +841,7 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 18px;
+  margin-top: 64px;
   padding: 12px 0 0;
   border-top: 1px solid #2b3544;
 }
@@ -881,7 +881,7 @@ h3 {
   flex-wrap: nowrap;
   align-items: stretch;
   justify-content: flex-start;
-  gap: 24px;
+  gap: 72px;
 }
 
 .logo-card {
