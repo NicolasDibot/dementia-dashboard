@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tableau de bord de la démence en Europe</title>
+    <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="./styles.css?v=pages-lock-2" />
+  </head>
+  <body class="is-locked">
+    <section id="access-gate" class="access-gate" aria-label="Dashboard access">
+      <form id="access-form" class="access-card">
+        <p class="eyebrow">Private preview</p>
+        <h1>Dementia dashboard</h1>
+        <p class="access-copy">Enter the preview password to open the interactive dashboard.</p>
+        <label for="access-password">Password</label>
+        <div class="access-row">
+          <input id="access-password" type="password" autocomplete="off" spellcheck="false" />
+          <button type="submit">Enter</button>
+        </div>
+        <p id="access-error" class="access-error" hidden>Incorrect password.</p>
+      </form>
+    </section>
+
+    <main class="app-shell" aria-hidden="true">
+      <aside class="sidebar" aria-label="Contrôles du dashboard">
+        <div class="brand-block">
+          <h1 id="app-title">Tableau de bord de la démence en Europe</h1>
+        </div>
+
+        <section class="control-section">
+          <div class="section-head">
+            <h2 id="factors-heading">Facteurs</h2>
+            <span id="selected-count" class="count-pill"></span>
+          </div>
+          <div class="quick-actions" aria-label="Sélection rapide">
+            <button type="button" data-action="all">Tous</button>
+            <button type="button" data-action="early">Enfance</button>
+            <button type="button" data-action="adult">Adulte</button>
+            <button type="button" data-action="work">Travail</button>
+            <button type="button" data-action="none">Aucun</button>
+          </div>
+          <div id="factor-list" class="factor-list"></div>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="paf-eyebrow">Fractions attribuables en population</p>
+            <h2 id="view-title">Fraction attribuable totale en population sélectionnée</h2>
+          </div>
+          <div class="segmented" aria-label="Carte affichée">
+            <button type="button" class="active" data-view="Total">Total</button>
+            <button type="button" data-view="Early life">Enfance</button>
+            <button type="button" data-view="Adulthood">Adulte</button>
+            <button type="button" data-view="Occupation">Travail</button>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="formula-toggle" />
+            <span id="formula-label">Somme additive</span>
+          </label>
+          <div class="language-switch" aria-label="Langue">
+            <button type="button" class="active" data-language="fr" aria-label="Français" title="Français">🇫🇷</button>
+            <button type="button" data-language="en" aria-label="English" title="English">🇺🇸</button>
+          </div>
+        </header>
+
+        <section class="stats-row" aria-label="Résumé">
+          <article class="stat-box stat-total">
+            <span data-stat-label="total">Total Europe</span>
+            <strong id="stat-europe-total">-</strong>
+          </article>
+          <article class="stat-box stat-early">
+            <span data-stat-label="early">Enfance</span>
+            <strong id="stat-europe-early">-</strong>
+          </article>
+          <article class="stat-box stat-adult">
+            <span data-stat-label="adult">Adulte</span>
+            <strong id="stat-europe-adult">-</strong>
+          </article>
+          <article class="stat-box stat-work">
+            <span data-stat-label="work">Travail</span>
+            <strong id="stat-europe-work">-</strong>
+          </article>
+        </section>
+
+        <section class="main-grid">
+          <div class="map-panel">
+            <div id="map" aria-label="Carte des fractions attribuables en population par pays"></div>
+            <div class="sex-map-control" aria-label="Sexe affiché">
+              <button type="button" class="active" data-sex="both">Deux sexes</button>
+              <button type="button" data-sex="women">Femmes</button>
+              <button type="button" data-sex="men">Hommes</button>
+            </div>
+            <button type="button" id="focus-close" class="focus-close" aria-label="Revenir à la carte Europe" hidden>
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="legend" id="legend"></div>
+          </div>
+
+          <div class="side-stack">
+            <aside class="detail-panel">
+              <div class="section-head">
+                <h2 id="detail-country">Sélection</h2>
+                <span id="detail-total" class="count-pill"></span>
+              </div>
+              <div id="group-bars" class="group-bars"></div>
+              <h3 id="contributors-heading">Variables sélectionnées</h3>
+              <div id="country-contributors" class="mini-table"></div>
+            </aside>
+
+            <section class="ranking-panel">
+              <div class="section-head">
+                <h2 id="ranking-heading">Classement pays</h2>
+                <span id="ranking-caption" class="subtle"></span>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th data-table-header="country">Pays</th>
+                      <th data-table-header="total">Total</th>
+                      <th data-table-header="early">Enfance</th>
+                      <th data-table-header="adult">Adulte</th>
+                      <th data-table-header="work">Travail</th>
+                      <th data-table-header="top">Top facteur</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ranking-body"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="total-panel">
+              <div class="section-head">
+                <h2 id="total-europe-heading">Total Europe</h2>
+                <span id="total-europe-caption" class="subtle"></span>
+              </div>
+              <div class="table-wrap">
+                <table class="total-table">
+                  <thead>
+                    <tr>
+                      <th data-total-header="factor">Variable</th>
+                      <th data-total-header="category">Catégorie</th>
+                      <th data-total-header="populationAttributableFraction">Fraction attribuable en population</th>
+                    </tr>
+                  </thead>
+                  <tbody id="total-europe-body"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="method-panel">
+          <h2 id="method-heading">Méthode</h2>
+          <div id="method-content" class="method-content"></div>
+        </section>
+
+        <section class="logos-panel" aria-label="Institutions partenaires">
+          <p id="credits-text" class="credits-text">
+            Ces travaux ont été réalisés par l'équipe TRACeR dirigée par le Pr. Philippe Rémy, dans le cadre d'un projet sur la démence dirigé par le Dr. Laurent Cleret de Langavant. Contributeurs: Dr. Nicolas Dibot, Dr. Amin Gharbi-Meliani, Pr. Eléonore Bayen, Pr. Kristin Yaffe
+          </p>
+          <div class="logo-strip">
+            <div class="logo-card logo-card-tracer">
+              <img src="./assets/logos/tracer.png" alt="TRACeR" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-wide">
+              <img src="./assets/logos/inserm.svg" alt="Inserm" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-wide">
+              <img src="./assets/logos/imrb.svg" alt="Institut Mondor de Recherche Biomédicale" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-wide logo-card-aphp">
+              <img src="./assets/logos/aphp.png" alt="Assistance Publique - Hôpitaux de Paris" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-square">
+              <img src="./assets/logos/upec.svg" alt="UPEC" loading="lazy" />
+            </div>
+            <div class="logo-card logo-card-wide logo-card-dec">
+              <img src="./assets/logos/dec-ens.png" alt="ENS Département d'études cognitives" loading="lazy" />
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./vendor/leaflet/leaflet.js"></script>
+    <script src="./app.js?v=pages-lock-2"></script>
+  </body>
+</html>
