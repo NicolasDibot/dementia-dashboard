@@ -372,6 +372,13 @@ function tableLabel(column) {
   return localizedFrom("table", column, column);
 }
 
+function groupClass(groupId) {
+  return String(groupId || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 function methodSections() {
   return currentLocale().method || translations.en.method || [];
 }
@@ -839,7 +846,7 @@ function renderTotalEuropeTable() {
   body.innerHTML = totalEuropeRows().map((row) => {
     return `
       <tr>
-        <td><strong>${factorLabel(row.factor)}</strong></td>
+        <td class="total-factor total-factor-${groupClass(row.factor.group)}"><strong>${factorLabel(row.factor)}</strong></td>
         <td>${groupLabel(row.factor.group)}</td>
         <td class="numeric">${pct(row.value)}</td>
       </tr>

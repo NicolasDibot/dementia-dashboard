@@ -690,6 +690,34 @@ h3 {
   min-width: 560px;
 }
 
+.total-factor {
+  position: relative;
+  padding-left: 14px;
+}
+
+.total-factor::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  bottom: 11px;
+  left: 4px;
+  width: 4px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.total-factor-adulthood {
+  color: var(--blue);
+}
+
+.total-factor-early-life {
+  color: var(--red);
+}
+
+.total-factor-occupation {
+  color: var(--green);
+}
+
 .method-panel {
   padding: 18px;
 }
