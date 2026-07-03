@@ -881,7 +881,7 @@ h3 {
   flex-wrap: nowrap;
   align-items: stretch;
   justify-content: flex-start;
-  gap: 8px;
+  gap: 24px;
 }
 
 .logo-card {
