@@ -276,7 +276,18 @@ h3 {
 .stats-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  column-gap: 12px;
+  row-gap: 4px;
+  align-items: stretch;
+}
+
+.stats-row-label {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.15;
+  text-transform: uppercase;
 }
 
 .stat-box,
@@ -329,15 +340,6 @@ h3 {
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
-}
-
-.stat-box .stat-sex {
-  display: block;
-  margin-bottom: 3px;
-  color: #334155;
-  font-size: 11px;
-  font-weight: 850;
-  text-transform: uppercase;
 }
 
 .stat-box strong {
@@ -1205,11 +1207,6 @@ td.numeric {
   }
 
   .stats-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .segmented {
-    grid-auto-flow: row;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
